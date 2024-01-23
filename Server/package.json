@@ -9,9 +9,22 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "ThanhDanh, MinhQuan, VanNhat",
   "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NguyenThanhDanh2211/BookStore.git"
+  },
+  "keywords": [
+    "BookStore"
+  ],
+  "bugs": {
+    "url": "https://github.com/NguyenThanhDanh2211/BookStore/issues"
+  },
+  "homepage": "https://github.com/NguyenThanhDanh2211/BookStore#readme",
   "description": ""
 }
