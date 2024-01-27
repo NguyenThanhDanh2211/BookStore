@@ -60,6 +60,7 @@ class UserController {
           token,
           redirectTo: '/admin',
         });
+        // res.render('admin');
       } else {
         // Chuyển hướng đến trang chủ bình thường
         res.status(200).json({
@@ -67,6 +68,7 @@ class UserController {
           token,
           redirectTo: '/',
         });
+        // res.render('user');
       }
     } catch (error) {
       console.error(error);
