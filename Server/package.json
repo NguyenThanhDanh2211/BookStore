@@ -9,6 +9,7 @@
     "mongoose-slug-generator": "^1.0.4",
     "morgan": "^1.10.0",
     "node-sass": "^9.0.0",
+    "nodemon": "^3.1.0",
     "schema": "^0.2.1"
   },
   "name": "server",
@@ -20,9 +21,6 @@
   },
   "author": "ThanhDanh, MinhQuan, VanNhat",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^3.0.3"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NguyenThanhDanh2211/BookStore.git"
