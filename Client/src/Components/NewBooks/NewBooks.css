@@ -1,0 +1,21 @@
+.new-book {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background: linear-gradient(180deg,#fde1ff 0%,white 60%);
+    height: 130vh;
+}
+.new-book h1{
+    color: black;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.books{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: top 50px;
+    gap: 50px;
+}
