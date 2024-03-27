@@ -1,20 +1,16 @@
 const express = require('express');
-const handlebars = require('express-handlebars');
-const path = require('path');
+const cors = require('cors');
+// const path = require('path');
 const route = require('./src/routes/index.route');
+
 const app = express();
+app.use(cors());
+
 const port = 3000;
 
 // Connecting DB
 const db = require('./src/config/db/index');
 db.connect();
-
-app.use(express.static(path.join(__dirname, 'public')));
-// Template engine, HandleBars
-const hbs = handlebars.create({ extname: '.hbs' });
-app.engine('hbs', hbs.engine);
-app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, './src/resourses/views'));
 
 app.use(express.json());
 

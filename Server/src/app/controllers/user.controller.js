@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 class UserController {
   async signup(req, res) {
     try {
-      const { name, phoneNumber, address, email, password } = req.body;
+      const { name, phoneNumber, email, password } = req.body;
 
       // Kiểm tra xem email đã được đăng ký hay chưa
       const existingUser = await User.findOne({ email });
@@ -20,7 +20,6 @@ class UserController {
       const newUser = new User({
         name,
         phoneNumber,
-        address,
         role: 'customer',
         email,
         password: hashedPass,
@@ -31,6 +30,8 @@ class UserController {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Thất bại' });
+
+      console.error(error);
     }
   }
 
