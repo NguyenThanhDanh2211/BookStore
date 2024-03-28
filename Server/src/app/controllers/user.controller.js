@@ -1,11 +1,12 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const crypto = require('crypto');
+const secretKey = crypto.randomBytes(32).toString('hex');
 class UserController {
   async signup(req, res) {
     try {
-      const { name, phoneNumber, address, email, password } = req.body;
+      const { name, phoneNumber, email, password } = req.body;
 
       // Kiểm tra xem email đã được đăng ký hay chưa
       const existingUser = await User.findOne({ email });
@@ -20,17 +21,21 @@ class UserController {
       const newUser = new User({
         name,
         phoneNumber,
-        address,
         role: 'customer',
         email,
         password: hashedPass,
       });
 
       await newUser.save();
-      res.status(201).json({ message: 'Đăng ký thành công' });
+      res.status(201).json({
+        message: 'Đăng ký thành công',
+        redirectTo: '/user/login',
+     });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Thất bại' });
+
+      console.error(error);
     }
   }
 
@@ -48,7 +53,7 @@ class UserController {
       // Tạo token
       const token = jwt.sign(
         { userId: user.id, email: user.email },
-        'your-secret-key', // Thay bằng secret key thực tế và không nên chia sẻ
+        'secretKey', // Thay bằng secret key thực tế và không nên chia sẻ
         { expiresIn: '1h' } // Thời gian hết hạn của token
       );
 
