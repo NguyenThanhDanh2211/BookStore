@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './CSS/Signup.css';
+
 const LoginSignup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -97,10 +98,5 @@ const LoginSignup = () => {
     </div>
   );
 };
-// ...
-
-
-
-// Sau khi đăng ký thành công
 
 export default LoginSignup;
