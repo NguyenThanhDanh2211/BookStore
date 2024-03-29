@@ -5,6 +5,6 @@ const cartRouter = require('./cart.route');
 function route(app) {
   app.use('/checkout-cart', cartRouter);
   app.use('/user', userRouter);
-  app.use('/', homeRouter);
+  //app.use('/', homeRouter);
 }
 module.exports = route;
