@@ -2,10 +2,11 @@ import { useState } from 'react';
 import './CSS/Login.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 import './CSS/Signup.css';
 
 const LoginSignup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     phoneNumber: '',
@@ -29,7 +30,9 @@ const LoginSignup = () => {
         password,
       });
       // console.log(response);
-      console.log(response.data); // Log phản hồi từ backend
+      console.log(response.data); 
+      navigate('/user/login');
+      // Log phản hồi từ backend
       // Thực hiện các hành động tiếp theo sau khi đăng ký thành công
     } catch (error) {
       console.error(error.response.data); // Log lỗi từ backend
@@ -37,7 +40,6 @@ const LoginSignup = () => {
         'There was a problem with your fetch operation:',
         error.message
       );
-
       // Xử lý lỗi và hiển thị thông báo cho người dùng
     }
   };
@@ -81,7 +83,7 @@ const LoginSignup = () => {
         </form>
         <p className="loginsignup-login">
           Bạn đã có tài khoản?
-          <Link style={{ textDecoration: 'none' }} to="/login">
+          <Link style={{ textDecoration: 'none' }} to="/user/login">
             <span> Đăng nhập ngay</span>
           </Link>
         </p>
