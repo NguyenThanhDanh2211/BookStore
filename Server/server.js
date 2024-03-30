@@ -17,7 +17,4 @@ app.use(express.json());
 //routes init
 route(app);
 
-// app.get('/', (req, res) => {
-//   res.render('home');
-// });
 app.listen(port, () => console.log(`App listen at http://localhost:${port}`));
