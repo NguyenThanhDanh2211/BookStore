@@ -14,5 +14,6 @@ function route(app) {
   const flaskApp = express();
   flaskProxy(flaskApp); // Sử dụng middleware flaskProxy cho Flask app
   app.use('/flask-api', flaskApp);
+
 }
 module.exports = route;

@@ -20,7 +20,7 @@ const Login = () => {
       console.log(response.data); // Log the response data
       if (email.includes('@admin')) {
         // Chuyển hướng đến trang admin
-        navigate('/admin');
+        window.location.href = 'http://localhost:4000/';
       } else {
         // Chuyển hướng đến trang chủ bình thường
         navigate('/');
