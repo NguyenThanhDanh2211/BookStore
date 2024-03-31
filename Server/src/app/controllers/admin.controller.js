@@ -1,108 +1,60 @@
 const Book = require('../models/book.model');
+
+
+
 class AdminController{
-    async create(req,res){
-        try {
-            const { name,
-                    author, 
-                    publisher, 
-                    yearofpublication, 
-                    language, 
-                    price, 
-                    description, 
-                    images, 
-                    genres, 
-                    ratings} = req.body;
-      
-            // Kiểm tra xem email đã được đăng ký hay chưa
-            const existingBook = await Book.findOne({ name });
-            if (existingBook) {
-              return res.status(400).json({ message: 'Sách đã tồn tại' });
-            }
-      
-
-            // Tạo người dùng mới
-            const newBook = new Book({
-                name,
-                author, 
-                publisher, 
-                yearofpublication, 
-                language, 
-                price, 
-                description, 
-                images, 
-                genres, 
-                ratings
-            });
-      
-            await newBook.save();
-            res.status(201).json({
-              message: 'Thêm sách thành công',
-           });
-          } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Thất bại' });
-            console.error(error);
-          }
+    // hiển thị sách 
+    async listbook(req,res){
+        const  books = await Book.find({});
+        console.log("All Book Fetched");
+        res.send(books);
     }
-
-    async update(req,res){
-        try {
-            const { bookId } = req.params; // Lấy bookId từ URL
-            const {
-                name,
-                author,
-                publisher,
-                yearofpublication,
-                language,
-                price,
-                description,
-                images,
-                genres,
-                ratings
-            } = req.body;
-
-            // Tìm sách theo bookId
-            const bookToUpdate = await Book.findById(bookId);
-            if (!bookToUpdate) {
-                return res.status(404).json({ message: 'Không tìm thấy sách' });
-            }
-
-            // Cập nhật thông tin sách
-            bookToUpdate.name = name;
-            bookToUpdate.author = author;
-            bookToUpdate.publisher = publisher;
-            bookToUpdate.yearofpublication = yearofpublication;
-            bookToUpdate.language = language;
-            bookToUpdate.price = price;
-            bookToUpdate.description = description;
-            bookToUpdate.images = images;
-            bookToUpdate.genres = genres;
-            bookToUpdate.ratings = ratings;
-
-            await bookToUpdate.save();
-            res.status(200).json({ message: 'Cập nhật sách thành công' });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Thất bại' });
+    //upload hình 
+    async upload(req,res){
+        res.json({
+            success: 1,
+            image_url: `http://localhost:${process.env.PORT}/images/${req.file.filename}`,
+        });
+    };
+    // thêm sách 
+    async addbook(req,res){
+        let books = await Book.find({})
+        let id;
+        if(books.length>0){
+            let last_book_array = books.slice(-1)
+            let last_book = last_book_array[0]
+            id = last_book.id + 1
         }
+        else{
+            id = 1
+        }
+        const book = new Book({
+            id: id,
+            name: req.body.name,
+            image: req.body.image,
+            author: req.body.author,
+            publisher: req.body.publisher,
+            category: req.body.category,
+            price: req.body.price,
+            date: req.body.date,
+            available: req.body.avilable
+        });
+        console.log(book);
+        await book.save();
+        console.log("Saved");
+        res.json({
+            success: true,
+            name: req.body.name,
+        })
     }
-    async delete(req, res) {
-        try {
-            const { bookId } = req.params; // Lấy bookId từ URL
-
-            // Tìm sách theo bookId
-            const bookToDelete = await Book.findById(bookId);
-            if (!bookToDelete) {
-                return res.status(404).json({ message: 'Không tìm thấy sách' });
-            }
-
-            // Xóa sách
-            await bookToDelete.remove();
-            res.status(200).json({ message: 'Xóa sách thành công' });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Thất bại' });
-        }
+    //xoa sach
+    async removebook(req,res){
+        await Book.findOneAndDelete({id:req.body.id})
+        console.log("Removed");
+        res.json({
+        success: true,
+        name: req.body.name,
+    });
     }
 }
 module.exports = new AdminController();
