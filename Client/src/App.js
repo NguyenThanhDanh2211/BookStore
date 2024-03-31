@@ -32,8 +32,8 @@ function App() {
             <Route path=":bookId" element={<Book />} />
           </Route>
           <Route path="/cart" element={<Cart />} />
-          <Route path="/user/login" element={<Login />} />
-          <Route path="/user/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
         <Footer />
       </BrowserRouter>

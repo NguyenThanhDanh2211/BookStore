@@ -9,7 +9,6 @@ function route(app) {
   app.use('/checkout-cart', cartRouter);
   app.use('/user', userRouter);
   app.use('/admin',adminRouter);
-  app.use('/', homeRouter);
   // Thêm một route mới để chuyển tiếp các yêu cầu liên quan đến API của Flask
   const flaskApp = express();
   flaskProxy(flaskApp); // Sử dụng middleware flaskProxy cho Flask app
