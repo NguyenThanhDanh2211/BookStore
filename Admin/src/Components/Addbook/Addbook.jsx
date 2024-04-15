@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Addbook.css';
 import upload_are from '../../assets/upload_area.svg';
 const Addbook = () => {
