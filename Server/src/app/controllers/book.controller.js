@@ -2,28 +2,24 @@ const Book = require('../models/book.model');
 const {mongooseToObject} = require('../../util/mongoose');
 
 class BookController {
-    show(req, res, next) {
-        // Book.findOne({slug: req.params.slug})
-        //     .then(book => {
-        //         res.render('book/show',{course: mongooseToObject(book)});
-        //     })
-        //     .catch(next);
-        res.render('book/show');
+    async all(req, res, next) {
+        try {
+            const books = await Book.find();
+            res.send(books);
+          } catch (error) {
+            res.status(500).send(error);
+          }
     }
     //[GET]/courses/create
-    create(req, res, next){
-        res.render('books/create');
+    async category(req,res){
+        try {
+            const books = await Book.find({ category: req.params.category });
+            res.send(books);
+          } catch (error) {
+            res.status(500).send(error);
+          }
     }
-    //[POST]/courses/store
-    async store(req, res, next) {
-         try {
-            const book = new Book(req.body);
-            await book.save();
-            res.redirect('/');
-        } catch (error) {
-            console.log('Loi!!!!');
-        }
-    }
+    
     
 }
 

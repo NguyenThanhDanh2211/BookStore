@@ -1,5 +1,5 @@
 const Book = require('../models/book.model');
-
+const port=3000;
 
 
 class AdminController{
@@ -13,7 +13,7 @@ class AdminController{
     async upload(req,res){
         res.json({
             success: 1,
-            image_url: `http://localhost:${process.env.PORT}/images/${req.file.filename}`,
+            image_url: `http://localhost:${port}/admin/images/${req.file.filename}`,
         });
     };
     // thêm sách 
