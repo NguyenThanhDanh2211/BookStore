@@ -31,7 +31,7 @@ const Category = (props) => {
       <div className='category-allbook'>
         {all_books.map((item, i) => {
           if (props.category === item.category) {
-            return <Item key={i} id={item.id} name={item.name} image={item.image} />;
+            return <Item key={i} id={item.id} name={item.name} image={item.image} price={item.price}/>;
           } else {
             return null;
           }
