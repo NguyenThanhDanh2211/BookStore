@@ -19,7 +19,14 @@ class BookController {
             res.status(500).send(error);
           }
     }
-    
+    async show(req, res, next) {
+      try {
+        const book = await Book.findOne({ id:req.params.id }); // Sử dụng _id thay vì id
+        res.send(book);
+      } catch (error) {
+        next(error); // Sử dụng next để xử lý lỗi
+      }
+    }
     
 }
 

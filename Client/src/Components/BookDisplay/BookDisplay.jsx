@@ -21,7 +21,7 @@ const BookDisplay = (props) => {
         </div>
       </div>
       <div className="bookdisplay-right">
-        <h1>{book.name}</h1>
+        <h1>{props.name}</h1>
         <div className="bookdisplay-right-star">
           <img src={star} alt="" />
           <img src={star} alt="" />
