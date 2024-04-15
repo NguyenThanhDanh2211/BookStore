@@ -18,6 +18,7 @@ class BookController {
     } catch (error) {
       res.status(500).send(error);
     }
+  }
     async show(req, res, next) {
       try {
         const book = await Book.findOne({ id:req.params.id }); // Sử dụng _id thay vì id
@@ -27,7 +28,6 @@ class BookController {
       }
     }
     
-  }
 
   async description(req, res) {
     const bookName = req.params.name;
