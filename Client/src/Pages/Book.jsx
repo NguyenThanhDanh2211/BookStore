@@ -30,8 +30,8 @@ const Book = () => {
     <div className='background'>
       <Breadcrum book={book} />
       <BookDisplay book={book} />
-      <Description />
-      
+      <Description book={book}/>
+      <RelateBook/>
     </div>
   );
 };
