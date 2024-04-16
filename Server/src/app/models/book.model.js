@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { description } = require('../controllers/book.controller');
 const Schema = mongoose.Schema;
 
 const Book = new Schema({
@@ -10,6 +11,7 @@ const Book = new Schema({
   category: { type: String, required: true },
   price: { type: Number, required: true },
   discount: { type: Number, required: true },
+  description: {type: String, required: true},
   date: { type: Date, default: Date.now },
   available: { type: Boolean, default: true },
 });
