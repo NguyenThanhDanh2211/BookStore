@@ -4,6 +4,7 @@ const { mongooseToObject } = require('../../util/mongoose');
 class BookController {
   async all(req, res, next) {
     try {
+      const books = await Book.find({});
       console.log('All Book Fetched');
 
       res.send(books);
