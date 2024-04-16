@@ -5,6 +5,7 @@ class BookController {
   async all(req, res, next) {
     try {
       const books = await Book.find();
+      console.log('All Book Fetched');
       res.send(books);
     } catch (error) {
       res.status(500).send(error);

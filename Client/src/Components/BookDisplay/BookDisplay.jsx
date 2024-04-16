@@ -32,7 +32,6 @@ const BookDisplay = (props) => {
         </div>
         <div className="bookdisplay-right-prices">{book.price}VND</div>
         <div className="bookdisplay-right-description">
-          Chi Tiết: {book.description}
         </div>
         <div className="bookdisplay-right-author">Tác Giả: {book.author}</div>
         <div className="bookdisplay-right-publisher">

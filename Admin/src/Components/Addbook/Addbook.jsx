@@ -148,8 +148,8 @@ const Addbook = () => {
             name="category"
             className="addbook-category"
           >
-            <option value="Sách Việt Nam">Sách Việt Nam</option>
-            <option value="Sách Nước Ngoài">Sách Nước Ngoài</option>
+            <option value="in">Sách Việt Nam</option>
+            <option value="on">Sách Nước Ngoài</option>
           </select>
         </div>
       </div>
