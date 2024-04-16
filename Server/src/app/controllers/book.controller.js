@@ -5,6 +5,7 @@ class BookController {
   async all(req, res, next) {
     try {
       const books = await Book.find({});
+      // const books = await Book.find({ category: req.params.category });
       console.log('All Book Fetched');
 
       res.send(books);
