@@ -11,7 +11,7 @@ const Addbook = () => {
     price: '',
     description: '',
     image: '',
-    category: 'Sách Việt Nam',
+    category: 'in',
     discount: '',
   });
   const imageHandler = (e) => {
