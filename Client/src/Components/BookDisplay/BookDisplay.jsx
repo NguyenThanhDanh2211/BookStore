@@ -21,7 +21,7 @@ const BookDisplay = (props) => {
         </div>
       </div>
       <div className="bookdisplay-right">
-        <h1>{props.name}</h1>
+        <h1>{book.name}</h1>
         <div className="bookdisplay-right-star">
           <img src={star} alt="" />
           <img src={star} alt="" />
@@ -30,12 +30,13 @@ const BookDisplay = (props) => {
           <img src={starpull} alt="" />
           <p>(19)</p>
         </div>
-        <div className="bookdisplay-right-prices">{book.price}VND</div>
-        <div className="bookdisplay-right-description">
+        <div className="bookdisplay-right-prices">{book.price} VND</div>
+        <div className="bookdisplay-right-description"></div>
+        <div className="bookdisplay-right-author">
+          Tác Giả: <b>{book.author}</b>
         </div>
-        <div className="bookdisplay-right-author">Tác Giả: {book.author}</div>
         <div className="bookdisplay-right-publisher">
-          Nhà Xuất Bản: {book.publisher}
+          Nhà Xuất Bản: <b>{book.publisher}</b>
         </div>
         <div className="bookdisplay-right-amount">Amount:</div>
         <div>
