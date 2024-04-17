@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './RelateBook.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const RelateBook = ({ bookName }) => {
-  // Nhận tên sách thông qua props
   const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [posterUrls, setPosterUrls] = useState([]);
+  const [bookIds, setBookIds] = useState([]);
 
   useEffect(() => {
     if (bookName) {
@@ -14,14 +15,19 @@ const RelateBook = ({ bookName }) => {
     }
   }, [bookName]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [recommendedBooks]);
+
   const fetchRecommendation = () => {
     axios
       .post('http://localhost:5000/recommend', {
-        selected_book: bookName, // Sử dụng tên sách để lấy sách liên quan
+        selected_book: bookName,
       })
       .then((response) => {
         setRecommendedBooks(response.data.recommended_books.slice(1, 6));
         setPosterUrls(response.data.poster_urls.slice(1, 6));
+        setBookIds(response.data.bookIds.slice(1, 6));
       })
       .catch((error) => {
         console.error('Error fetching recommendation:', error);
@@ -34,8 +40,11 @@ const RelateBook = ({ bookName }) => {
       <div className="relatebook-item">
         {recommendedBooks.map((book, index) => (
           <div key={index}>
-            <img src={posterUrls[index]} alt="Poster" />
-            <p>{book}</p>
+            {/* Sử dụng Link để chuyển đến trang chi tiết sách */}
+            <Link to={`/book/${bookIds[index]}`}>
+              <img src={posterUrls[index]} alt="Poster" />
+              <p>{book}</p>
+            </Link>
           </div>
         ))}
       </div>

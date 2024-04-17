@@ -21,24 +21,34 @@
 }
 
 .relatebook-item > div {
-  width: calc(20% - 20px); /* Phần trăm chiều rộng của mỗi item */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-  border-radius: 5px; /* Bo tròn viền */
-  overflow: hidden; /* Ẩn phần overflow */
-  margin-right: 20px; /* Khoảng cách giữa các phần tử */
+  width: calc(20% - 20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 20px;
+  transition: transform 0.3s;
 }
 
 .relatebook-item > div:last-child {
-  margin-right: 0; /* Không có margin-right cho phần tử cuối cùng */
+  margin-right: 0;
+}
+
+.relatebook-item > div:hover {
+  transform: translateY(-5px);
 }
 
 .relatebook-item img {
-  width: 100%; /* Chiều rộng hình ảnh */
-  height: auto; /* Chiều cao tự động điều chỉnh */
-  display: block; /* Hiển thị block để tránh lỗi khoảng trống */
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .relatebook-item p {
   padding: 10px;
   text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
