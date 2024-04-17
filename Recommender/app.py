@@ -5,7 +5,7 @@ import numpy as np
 from flask_cors import CORS  # Import thêm Flask CORS
 
 app = Flask(__name__)
-CORS(app, origins='*')  # Kích hoạt Flask CORS
+CORS(app)  # Kích hoạt Flask CORS
 
 # Load model and data
 model = pickle.load(open('./artifacts/model.pkl','rb'))
