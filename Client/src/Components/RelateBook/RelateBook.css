@@ -1,18 +1,44 @@
-.relatebook{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    height: 70vh;
+.relatebook {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  height: 70vh;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 
-.relatebook h1{
-    color: black;
-    font-size: 40px;
-    font-weight: 600;
+.relatebook h1 {
+  color: black;
+  font-size: 40px;
+  font-weight: 600;
 }
-.relatebook-item{
-    margin-top: 50px;
-    display: flex;
-    gap: 20px;
+
+.relatebook-item {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.relatebook-item > div {
+  width: calc(20% - 20px); /* Phần trăm chiều rộng của mỗi item */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+  border-radius: 5px; /* Bo tròn viền */
+  overflow: hidden; /* Ẩn phần overflow */
+  margin-right: 20px; /* Khoảng cách giữa các phần tử */
+}
+
+.relatebook-item > div:last-child {
+  margin-right: 0; /* Không có margin-right cho phần tử cuối cùng */
+}
+
+.relatebook-item img {
+  width: 100%; /* Chiều rộng hình ảnh */
+  height: auto; /* Chiều cao tự động điều chỉnh */
+  display: block; /* Hiển thị block để tránh lỗi khoảng trống */
+}
+
+.relatebook-item p {
+  padding: 10px;
+  text-align: center;
 }
