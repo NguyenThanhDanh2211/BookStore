@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import './Search.css';
 import { Link } from 'react-router-dom';
 
-const Search = ({ searchQuery }) => {
+const Search = ({ searchQuery, clearSearchQuery }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState('');
 
@@ -21,12 +20,15 @@ const Search = ({ searchQuery }) => {
     }
   };
 
-  // Fetch search results when the searchQuery changes
   useEffect(() => {
     if (searchQuery) {
       fetchSearchResults();
     }
   }, [searchQuery]);
+
+  const handleBookClick = () => {
+    clearSearchQuery(); // Clear the search query in the Navbar
+  };
 
   return (
     <div className="search-container">
@@ -34,7 +36,7 @@ const Search = ({ searchQuery }) => {
       {searchResults.length > 0 ? (
         <div className="result">
           {searchResults.map((book) => (
-            <div key={book.id}>
+            <div key={book.id} onClick={handleBookClick}>
               <Link to={`/book/${book.id}`} className="search-result-item">
                 <img src={book.image} className="imgSearch" alt="" />
                 <p className="namebook">{book.name}</p>
