@@ -21,9 +21,9 @@ class cartController {
 
   async addToCart(req, res, next) {
     try {
-      const { email, bookName, price, quantity, total, images } = req.body;
+      const { email,id, name, price, quantity, total, image } = req.body;
       // Kiểm tra sản phẩm trong giỏ hàng
-      let existingCartItem = await Cart.findOne({ email, bookName });
+      let existingCartItem = await Cart.findOne({ email, name });
 
       if (existingCartItem) {
         // Nếu sản phẩm có trong giỏ thì cộng dồn số lượng
@@ -34,11 +34,12 @@ class cartController {
         // Thêm một sản phẩm mới
         await Cart.create({
           email,
-          bookName,
+          id,
+          name,
           price,
           quantity,
           total,
-          images,
+          image,
         });
       }
 
@@ -47,6 +48,15 @@ class cartController {
       next(error);
     }
   }
+  async getTotalCartItems(res,req) {
+    let totalItems = 0;
+    for (const item in cartItems) {
+        if (cartItems[item] > 0) {
+            totalItems += cartItems[item];
+        }
+    }
+    res.json({ totalItems });
+  };
 }
 
 module.exports = new cartController();

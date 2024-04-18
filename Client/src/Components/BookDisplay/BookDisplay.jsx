@@ -1,12 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import './BookDisplay.css';
 import starpull from '../Assets/star.png';
 import star from '../Assets/starpull.png';
+import axios from 'axios';
+
 import { Context } from '../../Context/Context';
 
 const BookDisplay = (props) => {
-  const { addToCart } = useContext(Context);
   const { book } = props;
+  const [formData, setFormData] = useState({
+    email:'minhquan300902@gmail.com',
+    id:book.id,
+    name:book.name,
+    price:book.price,
+    quantity:1,
+    total:book.price,
+    image:book.image,
+  });
+  const { email, id, name, price, quantity, total, image, } = formData;
+  const addToCart = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/cart/addtocart', {
+        email,
+        id,
+        name,
+        price,
+        quantity,
+        total,
+        image,
+      });
+      console.log(response.data); 
+    } catch (error) {
+      console.error(error.response.data); 
+      console.error(
+        'There was a problem with your fetch operation:',
+        error.message
+      );
+    }
+  };
+
   return (
     <div className="bookdisplay">
       <div className="bookdisplay-left">
@@ -21,7 +54,7 @@ const BookDisplay = (props) => {
         </div>
       </div>
       <div className="bookdisplay-right">
-        <h1>{props.name}</h1>
+        <h1>{book.name}</h1>
         <div className="bookdisplay-right-star">
           <img src={star} alt="" />
           <img src={star} alt="" />
@@ -39,11 +72,7 @@ const BookDisplay = (props) => {
         </div>
         <div className="bookdisplay-right-amount">Amount:</div>
         <div>
-          <button
-            onClick={() => {
-              addToCart(book.id);
-            }}
-          >
+          <button onClick={addToCart}>
             Thêm Vào Giỏ Hàng
           </button>
           <button>Mua Ngay</button>
