@@ -1,107 +1,108 @@
-.bookdisplay{
-    display: flex;
-    margin-left: 150px;
-    margin-right: 150px;
-    background: white;
-    border-radius: 20px;
-    border: 1px  solid black;
-    cursor: pointer;
+.bookdisplay {
+  display: flex;
+  margin-left: 150px;
+  margin-right: 150px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid black;
+  cursor: pointer;
 }
-.bookdisplay-left{
-    display: flex;
-    gap: 5px;
+.bookdisplay-left {
+  display: flex;
+  gap: 5px;
 }
-.bookdisplay-img-list{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 120px;
-    height: 180px;
+.bookdisplay-img-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 120px;
+  height: 180px;
 }
-.bookdisplay-img-list img{
-    height: 163px;
+.bookdisplay-img-list img {
+  height: 163px;
 }
-.bookdisplay-main-img{
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
+.bookdisplay-main-img {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
 }
-.bookdisplay-right{
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
+.bookdisplay-right {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
-.bookdisplay-right h1{
-    color: black;
-    font-size: 25px;
-    font-weight: 700;
+.bookdisplay-right h1 {
+  color: black;
+  font-size: 25px;
+  font-weight: 700;
 }
-.bookdisplay-right-star{
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    margin-top: 13px;
-    color: #1c1c1c;
-    font-size: 16px;
+.bookdisplay-right-star {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: 13px;
+  color: #1c1c1c;
+  font-size: 16px;
 }
-.bookdisplay-right-star img{
-    object-fit: cover;
-    width: 20px;
-    height: 20px;
+.bookdisplay-right-star img {
+  object-fit: cover;
+  width: 20px;
+  height: 20px;
 }
-.bookdisplay-right-prices{
-    display: flex;
-    margin-top: 10px;
-    gap: 30px;
-    font-size: 24px;
-    font-weight: 700;
+.bookdisplay-right-prices {
+  display: flex;
+  margin-top: 10px;
+  gap: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(177, 3, 3);
 }
-.bookdisplay-right-description{
-    display: flex;
-    margin: 10px 0px;
-    gap: 5px;
-    font-size: 20px;
-    font-weight: 500;
+.bookdisplay-right-description {
+  display: flex;
+  margin: 10px 0px;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 500;
 }
-.bookdisplay-right-author{
-    display: flex;
-    margin: 10px 0px;
-    gap: 5px;
-    font-size: 20px;
-    font-weight: 500;
+.bookdisplay-right-author {
+  display: flex;
+  margin: 10px 0px;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 500;
 }
-.bookdisplay-right-publisher{
-    display: flex;
-    margin: 10px 0px;
-    gap: 5px;
-    font-size: 20px;
-    font-weight: 500;
+.bookdisplay-right-publisher {
+  display: flex;
+  margin: 10px 0px;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 500;
 }
-.bookdisplay-right-amount{
-    display: flex;
-    margin: 10px 0px;
-    gap: 5px;
-    font-size: 20px;
-    font-weight: 500;
+.bookdisplay-right-amount {
+  display: flex;
+  margin: 10px 0px;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 500;
 }
-.bookdisplay-right button{
-    padding: 20px 40px;
-    width: 240px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-top: 150px;
-    color: black;
-    background: #6096B4;
-    margin-left: 10px;
-    margin-bottom: 40px;
-    border: 1px solid #6096B4;
-    border-radius: 30px;
-    border: none ;
-    outline: none;
-    cursor: pointer;
-    transition: transform 0.3s;
+.bookdisplay-right button {
+  padding: 20px 40px;
+  width: 240px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 150px;
+  color: black;
+  background: #6096b4;
+  margin-left: 10px;
+  margin-bottom: 40px;
+  border: 1px solid #6096b4;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
-.bookdisplay-right button:hover{
-    transform: scale(1.2);
-    background-color: #6096B4;
+.bookdisplay-right button:hover {
+  transform: scale(1.2);
+  background-color: #6096b4;
 }
