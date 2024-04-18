@@ -1,9 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState } from 'react'
 import './CartItem.css'
 import { Context } from '../../Context/Context'
 import removeicon from '../../Components/Assets/remove.png'
 const CartItem = () => {
-    const {getTotalCartAmount, all_books, cartItems, removeFromCart } = useContext(Context);
+    const {all_books,setAllBooks} = useState([]);
+    const {cartItems, setCartItems} = useState([]);
+    const fetchInfo = async () => {
+        await fetch('http://localhost:3000/cart/getall')
+          .then((res) => res.json())
+          .then((data) => { setAllBooks(data) })
+      }
     return (
         <div className='cart'>
             <div className='cartitems'>
@@ -25,7 +31,7 @@ const CartItem = () => {
                             <p>{e.price}</p>
                             <button className='cartitems-quantity'>{cartItems[e.id]}</button>
                             <p>{e.price * cartItems[e.id]}</p>
-                            <img className='cartion-remove-icon' src={removeicon} onClick={() => { removeFromCart(e.id) }} alt='' />
+                            <img className='cartion-remove-icon' src={removeicon} onClick={() => { {/* remove */} }} alt='' />
                         </div>
                         <hr />
                     </div>
@@ -38,7 +44,7 @@ const CartItem = () => {
                     <div>
                         <div className='cartitems-total-item'>
                             <p>Tổng</p>
-                            <p>{getTotalCartAmount()}</p>
+                            {/* <p>{getTotalCartAmount()}</p> */}
                         </div>
                         <hr />
                         <div className='cartitems-total-item'>
@@ -48,7 +54,7 @@ const CartItem = () => {
                         <hr />
                         <div className='cartitems-total-item'>
                             <h3>Thành Tiền</h3>
-                            <h3>{getTotalCartAmount()}</h3>
+                            {/* <h3>{getTotalCartAmount()}</h3> */}
                         </div>
                         <button>Thanh Toán</button>
                     </div>

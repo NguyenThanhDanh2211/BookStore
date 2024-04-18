@@ -19,6 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     // Lấy thông tin người dùng từ localStorage khi component được render
     const savedUser = JSON.parse(localStorage.getItem('user'));
+    
     if (savedUser) {
       setUser(savedUser);
     }
@@ -124,7 +125,7 @@ const Navbar = () => {
       <div className="nav-cart">
         {user ? (
           <>
-            <span>{user.name}</span>
+            <span>Xin chào: {user.name}</span>
             <Link to="/login">
               <button className="signout" onClick={logout}>
                 Đăng xuất
