@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { description } = require('../controllers/book.controller');
 const Schema = mongoose.Schema;
 
 const Book = new Schema({

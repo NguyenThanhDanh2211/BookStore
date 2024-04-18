@@ -72,6 +72,7 @@ class UserController {
           message: 'Đăng nhập thành công - Chuyển hướng đến trang chủ',
           token,
           redirectTo: '/',
+          user,
         });
         // res.render('user');
       }

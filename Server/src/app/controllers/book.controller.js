@@ -2,14 +2,10 @@ const Book = require('../models/book.model');
 const { mongooseToObject } = require('../../util/mongoose');
 
 class BookController {
-  async all(req, res, next) {
-    try {
-      const books = await Book.find();
-      console.log('All Book Fetched');
-      res.send(books);
-    } catch (error) {
-      res.status(500).send(error);
-    }
+  async all(req, res) {
+    const books = await Book.find({});
+    console.log('All Book Fetched');
+    res.send(books);
   }
   //[GET]/courses/create
   async category(req, res) {
