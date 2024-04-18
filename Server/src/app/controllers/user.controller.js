@@ -4,6 +4,18 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const secretKey = crypto.randomBytes(32).toString('hex');
 class UserController {
+  async all(req, res, next) {
+    try {
+      const books = await User.find({});
+      // const books = await Book.find({ category: req.params.category });
+      console.log('All Book Fetched');
+
+      res.send(books);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
   async signup(req, res) {
     try {
       const { name, phoneNumber, email, password } = req.body;
@@ -30,7 +42,7 @@ class UserController {
       res.status(201).json({
         message: 'Đăng ký thành công',
         redirectTo: '/user/login',
-     });
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Thất bại' });

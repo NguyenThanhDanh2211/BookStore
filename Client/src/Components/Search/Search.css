@@ -1,0 +1,63 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: rgb(236, 240, 240);
+  border-radius: 15px;
+  position: absolute;
+  top: 82px;
+  left: 395px;
+  width: 700px;
+
+  /* opacity: 0; 
+  transition: opacity 0.3s ease; */
+}
+
+/* .search-container:hover {
+  opacity: 1;
+} */
+
+.search-container p {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.result {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-result-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  transition: box-shadow 0.3s ease; /* Thêm hiệu ứng chuyển động cho box-shadow */
+}
+
+.search-result-item:hover {
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Tạo hiệu ứng bóng nhẹ khi hover */
+  border-radius: 5px;
+}
+
+.imgSearch {
+  height: 75px;
+  object-fit: cover;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.namebook {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
