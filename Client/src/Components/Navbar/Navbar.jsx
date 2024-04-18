@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect  } from 'react';
 import './Navbar.css';
 import logo from '../Assets/logo.jpg';
 import cart from '../Assets/cart.jpg';
@@ -9,19 +9,38 @@ import Search from '../Search/Search'; // Import component Search
 
 const Navbar = () => {
   const [menu, setMenu] = useState('home');
-  const { getTotalCartItems } = useContext(Context);
-  const menuRef = useRef();
   const [searchQuery, setSearchQuery] = useState(''); // State để lưu trữ query tìm kiếm
   // const [showSearch, setShowSearch] = useState(false); // State để theo dõi trạng thái hiển thị của component Search
+  
+  const { getTotalCartItems } = useContext(Context);
+  const menuRef = useRef();
+
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    // Lấy thông tin người dùng từ localStorage khi component được render
+  const savedUser = JSON.parse(localStorage.getItem('user'));
+    if (savedUser) {
+      setUser(savedUser);
+    }
+  }, []);
+  console.log(localStorage.getItem('user'));
 
   const dropdown_toggle = (e) => {
     menuRef.current.classList.toggle('nav-menu-visible');
     e.target.classList.toggle('open');
   };
 
+  const logout = () => {
+    // Xóa thông tin người dùng khỏi localStorage
+    localStorage.removeItem('user');
+    // Chuyển hướng người dùng về trang đăng nhập hoặc trang chủ
+  };
+
+
   const handleKeyDown = (e) => {
     setSearchQuery(e.target.value); // Cập nhật giá trị của ô input
   };
+
 
   return (
     <div className="navbar">
@@ -78,9 +97,18 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="nav-cart">
-        <Link to="/login">
-          <button>Đăng Nhập</button>
-        </Link>
+        {user ? (
+          <>
+            <span>{user.name}</span>
+            <Link to="/login">
+              <button className='signout' onClick={logout}>Đăng xuất</button>
+            </Link>
+          </>
+        ) : (
+          <Link to="/login">
+            <button>Đăng Nhập</button>
+          </Link>
+        )}
         <Link to="cart">
           <img src={cart} alt="" />
         </Link>

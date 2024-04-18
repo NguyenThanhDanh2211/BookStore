@@ -1,6 +1,7 @@
 const Book = require('../models/book.model');
 const unidecode = require('unidecode');
 class BookController {
+
   async all(req, res, next) {
     try {
       const books = await Book.find({});
@@ -10,6 +11,7 @@ class BookController {
     } catch (error) {
       res.status(500).send(error);
     }
+
   }
   //[GET]/courses/create
   async category(req, res) {

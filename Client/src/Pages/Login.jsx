@@ -9,7 +9,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -18,6 +17,11 @@ const Login = () => {
       password,
       }); // Make an API request
       console.log(response.data); // Log the response data
+      if (response.data && response.data.user) {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+      } else {
+        console.error('No user data in response');
+      }
       if (email.includes('@admin')) {
         // Chuyển hướng đến trang admin
         window.location.href = 'http://localhost:5173/';
@@ -54,7 +58,7 @@ const Login = () => {
         </form>
         <p className="login-login">
           Bạn chưa có tài khoản?
-          <Link style={{ textDecoration: 'none' }} to="/user/signup">
+          <Link style={{ textDecoration: 'none' }} to="/signup">
             <span> Đăng ký ngay</span>
           </Link>
         </p>

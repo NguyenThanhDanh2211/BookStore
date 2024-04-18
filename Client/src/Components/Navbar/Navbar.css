@@ -70,6 +70,25 @@
   transition: transform 0.3s;
   cursor: pointer;
 }
+.nav-cart button.signout {
+  width: 70px;
+  height: 20px;
+  font-size: 10px;
+}
+.nav-cart span {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+  transition: background-color 0.3s;
+  display: inline-block;
+  transition: transform 0.3s;
+}
 .nav-cart button:active {
   background: #6096b4;
 }
