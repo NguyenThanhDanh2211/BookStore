@@ -106,3 +106,31 @@
   transform: scale(1.2);
   background-color: #6096b4;
 }
+
+.bookdisplay-percentDis {
+  background-color: rgb(177, 3, 3);
+  color: white;
+  border-radius: 5px;
+
+  text-decoration: solid;
+  margin: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.bookdisplay-price-old {
+  color: #8c8c8c;
+  font-size: 18px;
+  text-decoration: line-through;
+  margin: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+  gap: 30px;
+  font-size: 18px;
+}
+
+.bookdisplay-price {
+  display: flex;
+}
