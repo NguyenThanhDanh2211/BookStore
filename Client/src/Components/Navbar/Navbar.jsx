@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect  } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './Navbar.css';
 import logo from '../Assets/logo.jpg';
 import cart from '../Assets/cart.jpg';
@@ -14,8 +14,13 @@ const Navbar = () => {
   // const [showSearch, setShowSearch] = useState(false); // State để theo dõi trạng thái hiển thị của component Search
   const [totalCartItems, setTotalCartItems] = useState(0);
   const menuRef = useRef();
+  const inputRef = useRef();
+
   const [user, setUser] = useState(null);
   useEffect(() => {
+    // Lấy thông tin người dùng từ localStorage khi component được render
+    const savedUser = JSON.parse(localStorage.getItem('user'));
+    
     //Lấy thông tin người dùng từ localStorage khi component được render
     const savedUser = JSON.parse(localStorage.getItem('user'));
     if (savedUser) {
@@ -34,22 +39,41 @@ const Navbar = () => {
 
   }, []);
 
+  const handleSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const clearSearchQuery = () => {
+    setSearchQuery('');
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!inputRef.current.contains(event.target)) {
+        // Nếu click không nằm trong inputRef (component search), set state searchQuery về rỗng để ẩn component search
+        setSearchQuery('');
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   const dropdown_toggle = (e) => {
     menuRef.current.classList.toggle('nav-menu-visible');
     e.target.classList.toggle('open');
   };
 
   const logout = () => {
-    // Xóa thông tin người dùng khỏi localStorage
     localStorage.removeItem('user');
-    // Chuyển hướng người dùng về trang đăng nhập hoặc trang chủ
   };
-
 
   const handleKeyDown = (e) => {
     setSearchQuery(e.target.value); // Cập nhật giá trị của ô input
   };
-
 
   return (
     <div className="navbar">
@@ -72,14 +96,21 @@ const Navbar = () => {
         alt=""
       />
       <ul ref={menuRef} className="nav-menu">
-        <li>
+        <li ref={inputRef}>
           <input
             className="search"
             type="text"
             placeholder="Nhập tên sách cần tìm...."
-            onKeyDown={handleKeyDown} // Xử lý sự kiện nhấn phím
+            onKeyDown={handleKeyDown}
+            onChange={handleSearchQueryChange}
+            value={searchQuery}
           />
-          {searchQuery && <Search searchQuery={searchQuery} />}{' '}
+          {searchQuery && (
+            <Search
+              searchQuery={searchQuery}
+              clearSearchQuery={clearSearchQuery}
+            />
+          )}{' '}
           {/* Hiển thị component Search nếu có nội dung trong ô input */}
         </li>
         <li
@@ -110,7 +141,9 @@ const Navbar = () => {
           <>
             <span>Xin chào: {user.name}</span>
             <Link to="/login">
-              <button className='signout' onClick={logout}>Đăng xuất</button>
+              <button className="signout" onClick={logout}>
+                Đăng xuất
+              </button>
             </Link>
           </>
         ) : (

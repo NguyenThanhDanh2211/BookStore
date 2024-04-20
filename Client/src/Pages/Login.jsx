@@ -9,12 +9,13 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/user/login',{
-      email,
-      password,
+      const response = await axios.post('http://localhost:3000/user/login', {
+        email,
+        password,
       }); // Make an API request
       console.log(response.data); // Log the response data
       if (response.data && response.data.user) {
@@ -33,25 +34,26 @@ const Login = () => {
       console.error('Error fetching data:', error.message);
     }
   };
+
   return (
     <div className="login">
       <div className="login-container">
         <h1>Đăng Nhập</h1>
         <form onSubmit={handleSubmit}>
           <div className="login-fields">
-            <input 
+            <input
               type="text"
-              name='email'
-              placeholder="Nhập Email..." 
-              value={email} 
+              name="email"
+              placeholder="Nhập Email..."
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
-              type="password" 
-              name='password' 
-              placeholder="Nhập Mật Khẩu..." 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
+              type="password"
+              name="password"
+              placeholder="Nhập Mật Khẩu..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button>Đăng Nhập</button>

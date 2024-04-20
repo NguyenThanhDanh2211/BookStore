@@ -30,8 +30,8 @@ const LoginSignup = () => {
         password,
       });
       // console.log(response);
-      console.log(response.data); 
-      navigate('/user/login');
+      console.log(response.data);
+      navigate('/login');
       // Log phản hồi từ backend
       // Thực hiện các hành động tiếp theo sau khi đăng ký thành công
     } catch (error) {
@@ -83,7 +83,7 @@ const LoginSignup = () => {
         </form>
         <p className="loginsignup-login">
           Bạn đã có tài khoản?
-          <Link style={{ textDecoration: 'none' }} to="/user/login">
+          <Link style={{ textDecoration: 'none' }} to="/login">
             <span> Đăng nhập ngay</span>
           </Link>
         </p>

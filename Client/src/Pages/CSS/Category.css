@@ -1,45 +1,26 @@
-.category-book{
-    background: linear-gradient(180deg,#fde1ff 0%,#EEE9DA  60%) ;
+.category-book {
+  background: linear-gradient(180deg, #fde1ff 0%, #eee9da 60%);
 }
-.category-banner{
-    display: block;
-    margin-top: 80px;
-    margin-left: 150px;
-    width: 82%;
+.category-banner {
+  display: block;
+  margin-top: 90px;
+  margin-left: 100px;
+  /* margin-right: 10px; */
+  width: 84%;
 }
-.category-IndexBook{
-    display: flex;
-    margin: 0px 170px;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
+
+.category-sort {
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid #888;
 }
-.category-sort{
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 1px solid #888;
-}
-.category-IndexBook p span{
-    font-weight: 600;
-}
-.category-allbook{
-    margin-left: 100px;
-    margin-right: 100px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 80px;
-}
-.category-more{
-    margin: 0px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 60px;
-    border: 1px solid black;
-    border-radius: 75px;
-    background: #ededed;
-    color: black;
-    font-size: 18px;
-    font-weight: 500;
+
+.category-allbook {
+  margin-left: 100px;
+  margin-right: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

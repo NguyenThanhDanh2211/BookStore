@@ -8,6 +8,25 @@ const BookDisplay = (props) => {
   const savedUser = JSON.parse(localStorage.getItem('user'));
   const localemail = savedUser.email;
   const { book } = props;
+
+  const new_price = book.discount
+    ? (book.price * (1 - book.discount / 100)).toLocaleString('en-US')
+    : book.price && book.price.toLocaleString('en-US');
+
+  const discountPercent = book.discount ? book.discount + '%' : '';
+
+  const [formData, setFormData] = useState({
+    email: 'minhquan300902@gmail.com',
+    id: book.id,
+    name: book.name,
+    price: book.price,
+    quantity: 1,
+    total: book.price,
+    image: book.image,
+  });
+
+  const { email, id, name, price, quantity, total, image } = formData;
+
   const [formData, setFormData] = useState(null);
 
 useEffect(() => {
@@ -26,6 +45,26 @@ useEffect(() => {
 
   const addToCart = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/cart/addtocart',
+        {
+          email,
+          id,
+          name,
+          price,
+          quantity,
+          total,
+          image,
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error.response.data);
+      console.error(
+        'There was a problem with your fetch operation:',
+        error.message
+      );
     if (formData) {
       try {
         const response = await axios.post('http://localhost:3000/cart/addtocart', formData);
@@ -48,7 +87,7 @@ useEffect(() => {
           <img src={book.image} alt="" />
           <img src={book.image} alt="" />
           <img src={book.image} alt="" />
-          <img src={book.image} alt="" />
+          {/* <img src={book.image} alt="" /> */}
         </div>
         <div className="bookdisplay-img">
           <img className="bookdisplay-main-img" src={book.image} alt="" />
@@ -64,7 +103,20 @@ useEffect(() => {
           <img src={starpull} alt="" />
           <p>(19)</p>
         </div>
-        <div className="bookdisplay-right-prices">{book.price} VND</div>
+        <div className="bookdisplay-price">
+          <div className="bookdisplay-right-prices">{new_price} VND</div>
+          {/* Kiểm tra nếu % giảm giá là 0 thì chỉ hiển thị giá gốc */}
+          {book.discount !== 0 && (
+            <>
+              <div className="bookdisplay-price-old">{book.price} đ</div>
+              <div className="bookdisplay-percentDis">
+                {' '}
+                - {discountPercent}{' '}
+              </div>
+            </>
+          )}
+        </div>
+
         <div className="bookdisplay-right-description"></div>
         <div className="bookdisplay-right-author">
           Tác Giả: <b>{book.author}</b>
@@ -72,11 +124,9 @@ useEffect(() => {
         <div className="bookdisplay-right-publisher">
           Nhà Xuất Bản: <b>{book.publisher}</b>
         </div>
-        <div className="bookdisplay-right-amount">Amount:</div>
+        {/* <div className="bookdisplay-right-amount">Amount:</div> */}
         <div>
-          <button onClick={addToCart}>
-            Thêm Vào Giỏ Hàng
-          </button>
+          <button onClick={addToCart}>Thêm Vào Giỏ Hàng</button>
           <button>Mua Ngay</button>
         </div>
         <p className="bookdisplay-right-category">
