@@ -18,12 +18,21 @@ class cartController {
       next(error);
     }
   }
+  async getall(req,res){
+    try {
+      const cart = await Cart.find({email:req.body.email});
+      console.log('All Cart Fetched');
 
+      res.send(cart);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
   async addToCart(req, res, next) {
     try {
       const { email,id, name, price, quantity, total, image } = req.body;
       // Kiểm tra sản phẩm trong giỏ hàng
-      let existingCartItem = await Cart.findOne({ email, name });
+      const existingCartItem = await Cart.findOne({ email, name });
 
       if (existingCartItem) {
         // Nếu sản phẩm có trong giỏ thì cộng dồn số lượng
@@ -43,20 +52,44 @@ class cartController {
         });
       }
 
-      res.status(201).json({ message: 'Item added to cart successfully' });
+      res.status(201).json({ message: 'Item added to cart successfully' }, Cart);
     } catch (error) {
       next(error);
     }
-  }
-  async getTotalCartItems(res,req) {
-    let totalItems = 0;
-    for (const item in cartItems) {
-        if (cartItems[item] > 0) {
-            totalItems += cartItems[item];
-        }
-    }
-    res.json({ totalItems });
   };
+  async getTotalCartItems(req,res) {
+    try {
+      const cartItems = await Cart.find({ email: req.body.email });
+      let totalItems = 0;
+      for (const item of cartItems) {
+        totalItems += item.quantity;
+      }
+      res.json({ totalItems });
+    } catch (error) {
+      next(error);
+    }
+  };
+  async updateQuantity (req, res){
+    const { id, quantity } = req.body;
+    try {
+        let item = await Cart.findOne({ id });
+        item.quantity = quantity;
+        await item.save();
+        res.status(200).send('Số lượng đã được cập nhật');
+    } catch (error) {
+        res.status(500).send('Có lỗi xảy ra');
+    }
+  };
+  async remove (req, res){
+    const { id } = req.body;
+    try {
+        await Cart.deleteOne({ id });
+        res.status(200).send('Sản phẩm đã được xóa');
+    } catch (error) {
+        res.status(500).send('Có lỗi xảy ra');
+    }
+};
+
 }
 
 module.exports = new cartController();

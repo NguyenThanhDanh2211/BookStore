@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './BookDisplay.css';
 import starpull from '../Assets/star.png';
 import star from '../Assets/starpull.png';
 import axios from 'axios';
 
 const BookDisplay = (props) => {
+  const savedUser = JSON.parse(localStorage.getItem('user'));
   const { book } = props;
 
   const new_price = book.discount
@@ -12,18 +13,31 @@ const BookDisplay = (props) => {
     : book.price && book.price.toLocaleString('en-US');
 
   const discountPercent = book.discount ? book.discount + '%' : '';
-
   const [formData, setFormData] = useState({
-    email: 'minhquan300902@gmail.com',
-    id: book.id,
-    name: book.name,
-    price: book.price,
-    quantity: 1,
-    total: book.price,
-    image: book.image,
+    email: '',
+    id: '',
+    name: '',
+    price: '',
+    quantity: '',
+    total: '',
+    image: '',
   });
-
   const { email, id, name, price, quantity, total, image } = formData;
+ 
+
+useEffect(() => {
+  if (savedUser) {
+    setFormData({
+      email: savedUser.email,
+      id: book.id,
+      name: book.name,
+      price: book.price,
+      quantity: 1,
+      total: book.price,
+      image: book.image,
+    });
+  }
+}, [savedUser]);
 
   const addToCart = async (e) => {
     e.preventDefault();
@@ -47,8 +61,8 @@ const BookDisplay = (props) => {
         'There was a problem with your fetch operation:',
         error.message
       );
-    }
-  };
+    };
+  }
 
   return (
     <div className="bookdisplay">
