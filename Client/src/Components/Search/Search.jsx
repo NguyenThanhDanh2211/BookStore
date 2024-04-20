@@ -16,7 +16,7 @@ const Search = ({ searchQuery, clearSearchQuery }) => {
       setError('');
     } catch (error) {
       setSearchResults([]);
-      setError('Error fetching search results');
+      // setError('Error fetching search results');
     }
   };
 
@@ -45,7 +45,7 @@ const Search = ({ searchQuery, clearSearchQuery }) => {
           ))}
         </div>
       ) : (
-        <p>No search results</p>
+        <p>Xin lỗi! Hiện chúng tôi chưa có sách bạn cần!</p>
       )}
     </div>
   );

@@ -5,7 +5,7 @@
   background: white;
   border-radius: 20px;
   border: 1px solid black;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .bookdisplay-left {
   display: flex;
@@ -103,7 +103,7 @@
   transition: transform 0.3s;
 }
 .bookdisplay-right button:hover {
-  transform: scale(1.2);
+  transform: scale(1.03);
   background-color: #6096b4;
 }
 
