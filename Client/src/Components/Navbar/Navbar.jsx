@@ -18,9 +18,6 @@ const Navbar = () => {
 
   const [user, setUser] = useState(null);
   useEffect(() => {
-    // Lấy thông tin người dùng từ localStorage khi component được render
-    const savedUser = JSON.parse(localStorage.getItem('user'));
-    
     //Lấy thông tin người dùng từ localStorage khi component được render
     const savedUser = JSON.parse(localStorage.getItem('user'));
     if (savedUser) {

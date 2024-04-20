@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const BookDisplay = (props) => {
   const savedUser = JSON.parse(localStorage.getItem('user'));
-  const localemail = savedUser.email;
   const { book } = props;
 
   const new_price = book.discount
@@ -14,20 +13,17 @@ const BookDisplay = (props) => {
     : book.price && book.price.toLocaleString('en-US');
 
   const discountPercent = book.discount ? book.discount + '%' : '';
-
   const [formData, setFormData] = useState({
-    email: 'minhquan300902@gmail.com',
-    id: book.id,
-    name: book.name,
-    price: book.price,
-    quantity: 1,
-    total: book.price,
-    image: book.image,
+    email: '',
+    id: '',
+    name: '',
+    price: '',
+    quantity: '',
+    total: '',
+    image: '',
   });
-
   const { email, id, name, price, quantity, total, image } = formData;
-
-  const [formData, setFormData] = useState(null);
+ 
 
 useEffect(() => {
   if (savedUser) {
@@ -65,20 +61,8 @@ useEffect(() => {
         'There was a problem with your fetch operation:',
         error.message
       );
-    if (formData) {
-      try {
-        const response = await axios.post('http://localhost:3000/cart/addtocart', formData);
-        console.log(response.data); 
-      } catch (error) {
-        console.error(error.response.data); 
-        console.error(
-          'There was a problem with your fetch operation:',
-          error.message
-        );
-      }
-    }
-  };
-  
+    };
+  }
 
   return (
     <div className="bookdisplay">
