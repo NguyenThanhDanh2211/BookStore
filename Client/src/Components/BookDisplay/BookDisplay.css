@@ -19,7 +19,8 @@
   height: 180px;
 }
 .bookdisplay-img-list img {
-  height: 163px;
+  padding-top: 10px;
+  height: 150px;
 }
 .bookdisplay-main-img {
   width: 500px;
