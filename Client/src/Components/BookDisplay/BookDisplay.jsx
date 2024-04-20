@@ -57,7 +57,7 @@ const BookDisplay = (props) => {
           <img src={book.image} alt="" />
           <img src={book.image} alt="" />
           <img src={book.image} alt="" />
-          <img src={book.image} alt="" />
+          {/* <img src={book.image} alt="" /> */}
         </div>
         <div className="bookdisplay-img">
           <img className="bookdisplay-main-img" src={book.image} alt="" />
@@ -75,8 +75,16 @@ const BookDisplay = (props) => {
         </div>
         <div className="bookdisplay-price">
           <div className="bookdisplay-right-prices">{new_price} VND</div>
-          <div className="bookdisplay-price-old">{book.price} đ</div>
-          <div className="bookdisplay-percentDis"> - {discountPercent} </div>
+          {/* Kiểm tra nếu % giảm giá là 0 thì chỉ hiển thị giá gốc */}
+          {book.discount !== 0 && (
+            <>
+              <div className="bookdisplay-price-old">{book.price} đ</div>
+              <div className="bookdisplay-percentDis">
+                {' '}
+                - {discountPercent}{' '}
+              </div>
+            </>
+          )}
         </div>
 
         <div className="bookdisplay-right-description"></div>
@@ -86,7 +94,7 @@ const BookDisplay = (props) => {
         <div className="bookdisplay-right-publisher">
           Nhà Xuất Bản: <b>{book.publisher}</b>
         </div>
-        <div className="bookdisplay-right-amount">Amount:</div>
+        {/* <div className="bookdisplay-right-amount">Amount:</div> */}
         <div>
           <button onClick={addToCart}>Thêm Vào Giỏ Hàng</button>
           <button>Mua Ngay</button>
