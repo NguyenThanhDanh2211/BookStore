@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const Cart = new Schema({
   email: { type: String, required: true },
-  id: { type: String, required: true },
-  name: {type: String, required: true},
+  id: { type: String},
+  name: {type: String},
   price: { type: Number },
   quantity: { type: Number },
   total: { type: Number },

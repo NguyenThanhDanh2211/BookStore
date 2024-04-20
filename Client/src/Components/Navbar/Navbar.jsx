@@ -6,24 +6,33 @@ import { Link } from 'react-router-dom';
 import { Context } from '../../Context/Context';
 import nav_dropdown from '../Assets/dropdown.png';
 import Search from '../Search/Search'; // Import component Search
+import axios from 'axios';
 
 const Navbar = () => {
   const [menu, setMenu] = useState('home');
   const [searchQuery, setSearchQuery] = useState(''); // State để lưu trữ query tìm kiếm
   // const [showSearch, setShowSearch] = useState(false); // State để theo dõi trạng thái hiển thị của component Search
-  
-  const { getTotalCartItems } = useContext(Context);
+  const [totalCartItems, setTotalCartItems] = useState(0);
   const menuRef = useRef();
-
   const [user, setUser] = useState(null);
   useEffect(() => {
     //Lấy thông tin người dùng từ localStorage khi component được render
-  const savedUser = JSON.parse(localStorage.getItem('user'));
+    const savedUser = JSON.parse(localStorage.getItem('user'));
     if (savedUser) {
       setUser(savedUser);
     }
+
+    // Call API to get total cart items
+    axios.post('http://localhost:3000/cart/gettotalcartitems', { email: savedUser.email })
+    .then(response => {
+      setTotalCartItems(response.data.totalItems);
+    })
+    .catch(error => {
+      console.error('There was an error!', error);
+    });
+
+
   }, []);
-  console.log(localStorage.getItem('user'));
 
   const dropdown_toggle = (e) => {
     menuRef.current.classList.toggle('nav-menu-visible');
@@ -112,7 +121,7 @@ const Navbar = () => {
         <Link to="cart">
           <img src={cart} alt="" />
         </Link>
-        <div className="nav-cart-count">{getTotalCartItems()}</div>
+        <div className="nav-cart-count">{totalCartItems}</div>
       </div>
     </div>
   );

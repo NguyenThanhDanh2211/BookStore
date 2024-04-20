@@ -1,44 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './BookDisplay.css';
 import starpull from '../Assets/star.png';
 import star from '../Assets/starpull.png';
 import axios from 'axios';
 
-import { Context } from '../../Context/Context';
-
 const BookDisplay = (props) => {
+  const savedUser = JSON.parse(localStorage.getItem('user'));
+  const localemail = savedUser.email;
   const { book } = props;
-  const [formData, setFormData] = useState({
-    email:'minhquan300902@gmail.com',
-    id:book.id,
-    name:book.name,
-    price:book.price,
-    quantity:1,
-    total:book.price,
-    image:book.image,
-  });
-  const { email, id, name, price, quantity, total, image, } = formData;
+  const [formData, setFormData] = useState(null);
+
+useEffect(() => {
+  if (savedUser) {
+    setFormData({
+      email: savedUser.email,
+      id: book.id,
+      name: book.name,
+      price: book.price,
+      quantity: 1,
+      total: book.price,
+      image: book.image,
+    });
+  }
+}, [savedUser]);
+
   const addToCart = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:3000/cart/addtocart', {
-        email,
-        id,
-        name,
-        price,
-        quantity,
-        total,
-        image,
-      });
-      console.log(response.data); 
-    } catch (error) {
-      console.error(error.response.data); 
-      console.error(
-        'There was a problem with your fetch operation:',
-        error.message
-      );
+    if (formData) {
+      try {
+        const response = await axios.post('http://localhost:3000/cart/addtocart', formData);
+        console.log(response.data); 
+      } catch (error) {
+        console.error(error.response.data); 
+        console.error(
+          'There was a problem with your fetch operation:',
+          error.message
+        );
+      }
     }
   };
+  
 
   return (
     <div className="bookdisplay">
