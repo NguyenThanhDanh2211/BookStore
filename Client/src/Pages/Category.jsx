@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './CSS/Category.css';
-import dropdown from '../Components/Assets/dropdown.png';
 import Item from '../Components/Item/Item';
 
 const Category = (props) => {
@@ -22,14 +21,7 @@ const Category = (props) => {
   return (
     <div className="category-book">
       <img className="category-banner" src={props.banner} alt="" />
-      <div className="category-IndexBook">
-        <p>
-          <span>Showing 1-12</span> out of 14 book
-        </p>
-        <div className="category-sort">
-          Sort by <img src={dropdown} alt="" />
-        </div>
-      </div>
+
       <div className="category-allbook">
         {all_books.map((item, i) => {
           if (props.category === item.category) {
@@ -48,7 +40,6 @@ const Category = (props) => {
           }
         })}
       </div>
-      <div className="category-more">Explore More</div>
     </div>
   );
 };

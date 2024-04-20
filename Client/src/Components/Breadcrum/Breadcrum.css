@@ -3,9 +3,16 @@
   align-items: center;
   gap: 8px;
   color: black;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
+  padding-top: 20px;
+  padding-bottom: 10px;
   margin-top: 80px;
   margin-left: 150px;
   text-transform: capitalize;
+}
+
+.img-muiten {
+  height: 20px;
+  font-weight: 700;
 }
