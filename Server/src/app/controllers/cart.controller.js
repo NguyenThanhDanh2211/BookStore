@@ -18,9 +18,9 @@ class cartController {
       next(error);
     }
   }
-  async getall(req,res){
+  async getall(req, res) {
     try {
-      const cart = await Cart.find({email:req.body.email});
+      const cart = await Cart.find({ email: req.body.email });
       console.log('All Cart Fetched');
 
       res.send(cart);
@@ -30,7 +30,7 @@ class cartController {
   }
   async addToCart(req, res, next) {
     try {
-      const { email,id, name, price, quantity, total, image } = req.body;
+      const { email, id, name, price, quantity, total, image } = req.body;
       // Kiểm tra sản phẩm trong giỏ hàng
       const existingCartItem = await Cart.findOne({ email, name });
 
@@ -52,12 +52,12 @@ class cartController {
         });
       }
 
-      res.status(201).json({ message: 'Item added to cart successfully' }, Cart);
+      res.status(201).json({ message: 'Item added to cart successfully' });
     } catch (error) {
       next(error);
     }
-  };
-  async getTotalCartItems(req,res) {
+  }
+  async getTotalCartItems(req, res) {
     try {
       const cartItems = await Cart.find({ email: req.body.email });
       let totalItems = 0;
@@ -68,28 +68,27 @@ class cartController {
     } catch (error) {
       next(error);
     }
-  };
-  async updateQuantity (req, res){
+  }
+  async updateQuantity(req, res) {
     const { id, quantity } = req.body;
     try {
-        let item = await Cart.findOne({ id });
-        item.quantity = quantity;
-        await item.save();
-        res.status(200).send('Số lượng đã được cập nhật');
+      let item = await Cart.findOne({ id });
+      item.quantity = quantity;
+      await item.save();
+      res.status(200).send('Số lượng đã được cập nhật');
     } catch (error) {
-        res.status(500).send('Có lỗi xảy ra');
+      res.status(500).send('Có lỗi xảy ra');
     }
-  };
-  async remove (req, res){
+  }
+  async remove(req, res) {
     const { id } = req.body;
     try {
-        await Cart.deleteOne({ id });
-        res.status(200).send('Sản phẩm đã được xóa');
+      await Cart.deleteOne({ id });
+      res.status(200).send('Sản phẩm đã được xóa');
     } catch (error) {
-        res.status(500).send('Có lỗi xảy ra');
+      res.status(500).send('Có lỗi xảy ra');
     }
-};
-
+  }
 }
 
 module.exports = new cartController();
