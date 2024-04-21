@@ -22,35 +22,24 @@ const BookDisplay = (props) => {
     total: '',
     image: '',
   });
-  const { email, id, name, price, quantity, total, image } = formData;
 
-  // useEffect(() => {
-  //   if (savedUser) {
-  //     setFormData({
-  //       email: savedUser.email,
-  //       id: book.id,
-  //       name: book.name,
-  //       price: book.price,
-  //       quantity: 1,
-  //       total: book.price,
-  //       image: book.image,
-  //     });
-  //   }
-  // }, []);
+  const [successMessage, setSuccessMessage] = useState(''); // Trạng thái cho thông báo
+
+  const { email, id, name, price, quantity, total, image } = formData;
 
   useEffect(() => {
     if (savedUser) {
+      const discountPrice = Math.floor(
+        book.discount ? book.price * (1 - book.discount / 100) : book.price
+      );
+
       const newFormData = {
         email: savedUser.email,
         id: book.id,
         name: book.name,
-        price: book.discount
-          ? book.price * (1 - book.discount / 100)
-          : book.price,
+        price: discountPrice,
         quantity: 1,
-        total: book.discount
-          ? book.price * (1 - book.discount / 100)
-          : book.price,
+        total: discountPrice,
         image: book.image,
       };
 
@@ -58,7 +47,7 @@ const BookDisplay = (props) => {
         setFormData(newFormData);
       }
     }
-  }, [savedUser, book]); // Kiểm tra trước khi gọi setFormData
+  }, [savedUser, book]);
 
   const addToCart = async (e) => {
     e.preventDefault();
@@ -75,24 +64,29 @@ const BookDisplay = (props) => {
           image,
         }
       );
-      console.log(response.data);
+
+      // Hiển thị thông báo thành công
+      setSuccessMessage('Thêm vào giỏ hàng thành công!');
+
+      // Ẩn thông báo sau 5 giây
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
     } catch (error) {
-      console.error(error.response.data);
-      console.error(
-        'There was a problem with your fetch operation:',
-        error.message
-      );
+      console.error('Có lỗi xảy ra:', error.message);
     }
   };
 
   return (
     <div className="bookdisplay">
+      {successMessage && (
+        <div className="success-message">{successMessage}</div> // Hiển thị thông báo
+      )}
       <div className="bookdisplay-left">
         <div className="bookdisplay-img-list">
           <img src={book.image} alt="" />
           <img src={book.image} alt="" />
           <img src={book.image} alt="" />
-          {/* <img src={book.image} alt="" /> */}
         </div>
         <div className="bookdisplay-img">
           <img className="bookdisplay-main-img" src={book.image} alt="" />
@@ -110,14 +104,10 @@ const BookDisplay = (props) => {
         </div>
         <div className="bookdisplay-price">
           <div className="bookdisplay-right-prices">{new_price} VND</div>
-          {/* Kiểm tra nếu % giảm giá là 0 thì chỉ hiển thị giá gốc */}
           {book.discount !== 0 && (
             <>
               <div className="bookdisplay-price-old">{book.price} đ</div>
-              <div className="bookdisplay-percentDis">
-                {' '}
-                - {discountPercent}{' '}
-              </div>
+              <div className="bookdisplay-percentDis">- {discountPercent}</div>
             </>
           )}
         </div>
@@ -129,7 +119,6 @@ const BookDisplay = (props) => {
         <div className="bookdisplay-right-publisher">
           Nhà Xuất Bản: <b>{book.publisher}</b>
         </div>
-        {/* <div className="bookdisplay-right-amount">Amount:</div> */}
         <div>
           <button onClick={addToCart}>Thêm Vào Giỏ Hàng</button>
           <button>Mua Ngay</button>

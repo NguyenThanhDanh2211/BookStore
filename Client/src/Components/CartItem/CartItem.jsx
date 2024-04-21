@@ -80,7 +80,7 @@ const CartItem = () => {
     <div className="cart">
       <div className="cartitems">
         <div className="cartitems-format-main">
-          <p>Book</p>
+          <p>Sách</p>
           <p></p>
           <p>Đơn Giá</p>
           <p>Số Lượng</p>
@@ -88,14 +88,14 @@ const CartItem = () => {
           <p></p>
         </div>
         <hr />
-        {cartItems.map((e) => {
+        {cartItems.map((e, index) => {
           if (e.quantity > 0) {
             return (
-              <div>
+              <div key={index}>
                 <div className="cartitems-fortmat cartitems-format-main">
                   <img src={e.image} alt="" className="cartion-book-icon" />
                   <p>{e.name}</p>
-                  <p>{e.price}</p>
+                  <p>{e.price.toLocaleString('en-US')}</p>
                   <input
                     type="number"
                     value={e.quantity}
@@ -104,7 +104,7 @@ const CartItem = () => {
                     }
                     className="cartitems-quantity"
                   />
-                  <p>{e.price * e.quantity}</p>
+                  <p>{(e.price * e.quantity).toLocaleString('en-US')}</p>
                   <img
                     className="cartion-remove-icon"
                     src={removeicon}
@@ -125,7 +125,7 @@ const CartItem = () => {
             <div>
               <div className="cartitems-total-item">
                 <p>Tổng</p>
-                <p>{total}</p>
+                <p>{total.toLocaleString('en-US')}</p>
               </div>
               <hr />
               <div className="cartitems-total-item">
@@ -135,7 +135,7 @@ const CartItem = () => {
               <hr />
               <div className="cartitems-total-item">
                 <h3>Thành Tiền</h3>
-                <h3>{total}</h3>
+                <h3>{total.toLocaleString('en-US')}</h3>
               </div>
               <button onClick={handlePayment}>Thanh Toán</button>
               {isModalOpen && <Modal closeModal={closeModal} qrCode={qrCode} />}

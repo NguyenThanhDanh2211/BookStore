@@ -135,3 +135,29 @@
 .bookdisplay-price {
   display: flex;
 }
+
+.success-message {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 20px;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  animation: fade-out 4s forwards; /* Tạo hiệu ứng mờ dần sau 3 giây */
+}
+
+/* Tạo animation để mờ dần sau 3 giây */
+@keyframes fade-out {
+  0% {
+    opacity: 1; /* Bắt đầu từ trạng thái rõ ràng */
+  }
+  100% {
+    opacity: 0; /* Kết thúc ở trạng thái mờ dần */
+  }
+}
