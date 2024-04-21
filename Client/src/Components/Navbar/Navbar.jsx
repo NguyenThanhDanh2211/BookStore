@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Navbar.css';
 import logo from '../Assets/logo.jpg';
 import cart from '../Assets/cart.jpg';
 import { Link } from 'react-router-dom';
-import { Context } from '../../Context/Context';
 import nav_dropdown from '../Assets/dropdown.png';
 import Search from '../Search/Search'; // Import component Search
 import axios from 'axios';
@@ -11,7 +10,6 @@ import axios from 'axios';
 const Navbar = () => {
   const [menu, setMenu] = useState('home');
   const [searchQuery, setSearchQuery] = useState(''); // State để lưu trữ query tìm kiếm
-  // const [showSearch, setShowSearch] = useState(false); // State để theo dõi trạng thái hiển thị của component Search
   const [totalCartItems, setTotalCartItems] = useState(0);
   const menuRef = useRef();
   const inputRef = useRef();
@@ -22,18 +20,19 @@ const Navbar = () => {
     const savedUser = JSON.parse(localStorage.getItem('user'));
     if (savedUser) {
       setUser(savedUser);
+
+      // Call API to get total cart items
+      axios
+        .post('http://localhost:3000/cart/gettotalcartitems', {
+          email: savedUser.email,
+        })
+        .then((response) => {
+          setTotalCartItems(response.data.totalItems);
+        })
+        .catch((error) => {
+          console.error('There was an error!', error);
+        });
     }
-
-    // Call API to get total cart items
-    axios.post('http://localhost:3000/cart/gettotalcartitems', { email: savedUser.email })
-    .then(response => {
-      setTotalCartItems(response.data.totalItems);
-    })
-    .catch(error => {
-      console.error('There was an error!', error);
-    });
-
-
   }, []);
 
   const handleSearchQueryChange = (e) => {

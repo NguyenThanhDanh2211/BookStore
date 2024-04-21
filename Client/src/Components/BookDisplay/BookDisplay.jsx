@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './BookDisplay.css';
 import starpull from '../Assets/star.png';
 import star from '../Assets/starpull.png';
@@ -23,21 +23,42 @@ const BookDisplay = (props) => {
     image: '',
   });
   const { email, id, name, price, quantity, total, image } = formData;
- 
 
-useEffect(() => {
-  if (savedUser) {
-    setFormData({
-      email: savedUser.email,
-      id: book.id,
-      name: book.name,
-      price: book.price,
-      quantity: 1,
-      total: book.price,
-      image: book.image,
-    });
-  }
-}, [savedUser]);
+  // useEffect(() => {
+  //   if (savedUser) {
+  //     setFormData({
+  //       email: savedUser.email,
+  //       id: book.id,
+  //       name: book.name,
+  //       price: book.price,
+  //       quantity: 1,
+  //       total: book.price,
+  //       image: book.image,
+  //     });
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (savedUser) {
+      const newFormData = {
+        email: savedUser.email,
+        id: book.id,
+        name: book.name,
+        price: book.discount
+          ? book.price * (1 - book.discount / 100)
+          : book.price,
+        quantity: 1,
+        total: book.discount
+          ? book.price * (1 - book.discount / 100)
+          : book.price,
+        image: book.image,
+      };
+
+      if (JSON.stringify(formData) !== JSON.stringify(newFormData)) {
+        setFormData(newFormData);
+      }
+    }
+  }, [savedUser, book]); // Kiểm tra trước khi gọi setFormData
 
   const addToCart = async (e) => {
     e.preventDefault();
@@ -61,8 +82,8 @@ useEffect(() => {
         'There was a problem with your fetch operation:',
         error.message
       );
-    };
-  }
+    }
+  };
 
   return (
     <div className="bookdisplay">
