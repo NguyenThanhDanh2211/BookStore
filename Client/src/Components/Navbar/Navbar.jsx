@@ -22,7 +22,6 @@ const Navbar = () => {
     const savedUser = JSON.parse(localStorage.getItem('user'));
     if (savedUser) {
       setUser(savedUser);
-    }
 
     // Call API to get total cart items
     axios.post('http://localhost:3000/cart/gettotalcartitems', { email: savedUser.email })
@@ -32,8 +31,7 @@ const Navbar = () => {
     .catch(error => {
       console.error('There was an error!', error);
     });
-
-
+  }
   }, []);
 
   const handleSearchQueryChange = (e) => {

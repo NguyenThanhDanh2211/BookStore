@@ -25,19 +25,20 @@ const BookDisplay = (props) => {
   const { email, id, name, price, quantity, total, image } = formData;
  
 
-useEffect(() => {
-  if (savedUser) {
-    setFormData({
-      email: savedUser.email,
-      id: book.id,
-      name: book.name,
-      price: book.price,
-      quantity: 1,
-      total: book.price,
-      image: book.image,
-    });
-  }
-}, [savedUser]);
+  useEffect(() => {
+    if (savedUser) {
+      setFormData({
+        email: savedUser.email,
+        id: book.id,
+        name: book.name,
+        price: book.price,
+        quantity: 1,
+        total: book.price,
+        image: book.image,
+      });
+    }
+  }, [savedUser]); // Thêm book vào mảng dependency
+  
 
   const addToCart = async (e) => {
     e.preventDefault();
