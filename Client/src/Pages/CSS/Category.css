@@ -18,9 +18,41 @@
 .category-allbook {
   margin-left: 100px;
   margin-right: 100px;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 50px;
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.category-book select.sort{
+  width: 160px;
+  height: 50px;
+  color: #7b7b7b;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #7b7b7b8d;
+  border-radius: 4px;
+  position:absolute;
+  display: block;
+  margin-top: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
+  right: 100px;;
+}
+.category-book select.amount{
+  width: 160px;
+  height: 50px;
+  color: #7b7b7b;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #7b7b7b8d;
+  border-radius: 4px;
+  position:absolute;
+  display: block;
+  margin-top: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
+  right:260px;
 }
