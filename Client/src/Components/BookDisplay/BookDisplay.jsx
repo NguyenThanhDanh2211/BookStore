@@ -3,9 +3,10 @@ import './BookDisplay.css';
 import starpull from '../Assets/star.png';
 import star from '../Assets/starpull.png';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const BookDisplay = (props) => {
   const savedUser = JSON.parse(localStorage.getItem('user'));
+  const navigate = useNavigate();
   const { book } = props;
 
   const new_price = book.discount
@@ -51,6 +52,11 @@ const BookDisplay = (props) => {
 
   const addToCart = async (e) => {
     e.preventDefault();
+    if (!savedUser) {
+      // Nếu người dùng chưa đăng nhập, chuyển hướng họ đến trang đăng nhập
+      navigate('/login');
+      return;
+    }
     try {
       const response = await axios.post(
         'http://localhost:3000/cart/addtocart',
