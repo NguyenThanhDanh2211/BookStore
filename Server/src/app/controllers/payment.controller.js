@@ -29,20 +29,20 @@ class paymentController {
 
     // Tạo chuỗi MAC
     const hmac_input = `${orderInfo.app_id}|${orderInfo.app_trans_id}|${orderInfo.app_user}|${orderInfo.amount}|${orderInfo.app_time}|${orderInfo.embed_data}|${orderInfo.item}`;
-    const mac = HMAC(HmacSHA256, key1, hmac_input)
+    const mac = crypto.createHmac('sha256', key1).update(hmac_input).digest('hex');
     orderInfo.mac = mac;
 
     // Gọi ZaloPay API để tạo đơn hàng
     try {
       const zalopayResponse = await axios.post(createOrderUrl, null, { params: orderInfo });
       // Kiểm tra phản hồi và trả về mã QR cho client
-        if (zalopayResponse.data && zalopayResponse.data.qr_code) {
+        // if (zalopayResponse.data && zalopayResponse.data.qr_code) {
             res.json({ qrCode: zalopayResponse.data.qr_code });
-        } else {
-            // Xử lý trường hợp không nhận được mã QR
-            console.error('Không nhận được mã QR từ ZaloPay:', zalopayResponse.data);
-            res.status(500).send('Không nhận được mã QR từ ZaloPay');
-        }
+        // } else {
+        //     // Xử lý trường hợp không nhận được mã QR
+        //     console.error('Không nhận được mã QR từ ZaloPay:', zalopayResponse.data);
+        //     res.status(500).send('Không nhận được mã QR từ ZaloPay');
+        // }
         } catch (error) {
         // Xử lý lỗi chi tiết hơn
         if (error.response) {
