@@ -29,6 +29,7 @@ const Login = () => {
       } else {
         // Chuyển hướng đến trang chủ bình thường
         navigate('/');
+        window.location.reload();
       }
     } catch (error) {
       console.error('Error fetching data:', error.message);
